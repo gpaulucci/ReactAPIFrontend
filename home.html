@@ -8,29 +8,15 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="/styles/style.buldle.css" rel="stylesheet" >
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-
-    <!-- Alertify min CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-
-    <style>
-        a.editor-create {
-        display: inline-block;
-        margin-bottom: 0.5em;
-    }
-    </style>
 </head>
-<body class="page-loading-enabled page-loading header-fixed header-tablet-and-mobile-fixed sidebar-enabled">
-		<!--begin::loader-->
-		<div class="page-loader">
-			<span class="spinner-border text-primary" role="status">
-				<span class="visually-hidden">Cargando...</span>
-			</span>
-		</div>
-		<!--end::Loader-->
-
+<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-tablet-and-mobile-fixed sidebar-enabled">
+	<!--begin::loader-->
+	<div class="page-loader">
+		<span class="spinner-border text-primary" role="status">
+			<span class="visually-hidden">Cargando...</span>
+		</span>
+	</div>
+	<!--end::Loader-->
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Content-->
@@ -60,13 +46,13 @@
                         <!--begin::Wrapper-->
                         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
                             <!--begin::Navbar-->
-                            <div class="d-flex align-items-stretch" id="kt_header_nav">
+                            <div class="d-flex align-items-stretch">
                                 <!--begin::Menu wrapper-->
-                                <div class="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
+                                <div class="header-menu align-items-stretch">
                                     <!--begin::Menu-->
-                                    <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
+                                    <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
                                         
-                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item  menu-lg-down-accordion me-lg-1">
+                                        <div class="menu-item  menu-lg-down-accordion me-lg-1">
                                             <span class="menu-link py-3">
                                                 <span class="menu-icon">
                                                     <span class="svg-icon svg-icon-2">
@@ -82,7 +68,7 @@
                                             </span>
                                         </div>
 
-                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                                        <div class="menu-item menu-lg-down-accordion me-lg-1">
                                             <span class="menu-link py-3">
                                                 <span class="menu-icon">
                                                     <span class="svg-icon svg-icon-2">
@@ -97,7 +83,7 @@
                                             </span>
                                         </div>
 
-                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                                        <div class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 												<span class="menu-icon">
 													<span class="svg-icon svg-icon-2">
@@ -112,7 +98,7 @@
 											</span>
 										</div>
 
-                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                                        <div class="menu-item menu-lg-down-accordion me-lg-1">
                                             <span class="menu-link py-3">
                                                 <span class="menu-icon">
                                                     <span class="svg-icon svg-icon-2">
@@ -123,7 +109,7 @@
                                                     </span>
                                                 </span>
                                                 
-                                                <span class="menu-title"><a class="menu-link py-3" href="#">Usuarios</a></span>
+                                                <span class="menu-title"><a class="menu-link py-3" href="user-management.html">Usuarios</a></span>
                                                 <span class="menu-arrow d-lg-none"></span>
                                             </span>
                                         </div>
@@ -137,35 +123,9 @@
 
                             <!--begin::Toolbar wrapper-->
 							<div class="d-flex align-items-stretch flex-shrink-0">
-								<!--begin::Theme mode-->
-								<div class="d-flex align-items-center ms-1 ms-lg-2">
-									<a href="#" class="btn btn-icon btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-										<i class="fonticon-sun fs-2"></i>
-										<i class="fonticon-moon fs-2 d-none"></i>
-									</a>
-									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-200px" data-kt-menu="true">
-										<div class="menu-item px-3 my-1">
-											<a href="../../demo5/dist/?page=index" class="menu-link px-3 active">
-												<span class="menu-icon">
-													<i class="fonticon-sun fs-2"></i>
-												</span>
-												<span class="menu-title">Light</span>
-											</a>
-										</div>
-										<div class="menu-item px-3 my-1">
-											<a href="../../demo5/dist/?page=index&amp;mode=dark" class="menu-link px-3">
-												<span class="menu-icon">
-													<i class="fonticon-moon fs-2"></i>
-												</span>
-												<span class="menu-title">Dark</span>
-											</a>
-										</div>
-									</div>
-								</div>
-								<!--end::Theme mode-->
 								<!--begin::User-->
 								<div class="d-flex align-items-center ms-lg-5" id="kt_header_user_menu_toggle">
-									<div class="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+									<div class="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3">
 										<div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
 											<span class="text-muted fs-7 fw-bold lh-1 mb-2">Hola</span>
 											<span class="text-dark fs-base fw-bolder lh-1 mb-2" id="LoginName"></span>
@@ -178,8 +138,8 @@
 								</div>
 								<!--end::User -->
 								<!--begin::Header menu toggle-->
-                                <div class="d-flex d-lg-none align-items-center me-n2" title="Show header menu">
-									<button class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_header_menu_mobile_toggle">
+								<div class="d-flex d-lg-none align-items-center me-n2">
+									<button class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px">
 										<span class="svg-icon svg-icon-1">
 											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 												<path d="M13 11H3C2.4 11 2 10.6 2 10V9C2 8.4 2.4 8 3 8H13C13.6 8 14 8.4 14 9V10C14 10.6 13.6 11 13 11ZM22 5V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4V5C2 5.6 2.4 6 3 6H21C21.6 6 22 5.6 22 5Z" fill="black"></path>
@@ -204,85 +164,27 @@
 					<!--begin::Wrapper-->
 					<div class="wrapper d-flex flex-column flex-row-fluid mt-5 mt-lg-10" id="kt_wrapper">
 						<!--begin::Content-->
-						<div class="content flex-column-fluid" id="kt_content-hdr">
-                        <!--begin::Toolbar-->
-                        <div class="toolbar d-flex flex-stack flex-wrap mb-5 mb-lg-7" id="kt_toolbar">
-                            <div class="page-title d-flex flex-column py-1">
-                                <h1 class="d-flex align-items-center my-1">
-                                    <span class="text-dark fw-bolder fs-1">Usuarios</span>
-                                </h1>
-                                <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-                                    <li class="breadcrumb-item text-muted">
-                                        <a href="index.html" class="text-muted text-hover-primary">Inicio</a>
-                                    </li>
-                                    <li class="breadcrumb-item">
-                                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
-                                    </li>
-                                    <li class="breadcrumb-item text-dark">Usuarios</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--end::Toolbar-->
-
-                        <div class="post" id="kt_post">
-                            <!--begin::Card-->
-                            <div class="card">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <!--begin::Search-->
-                                        <div class="d-flex align-items-center position-relative my-1">
-
-                                        </div>
-                                        <!--end::Search-->
-                                    </div>
-                                    <!--begin::Add user-->
-                                    <div class="card-title">
-                                        <button type="button" class="btn btn-primary" id="btnNewUser" data-bs-toggle="modal" data-bs-target="#modalUserWin">
-                                        <!--button type="button" class="btn btn-primary" id="btnNewUser" data-bs-toggle="modal"-->
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black"></rect>
-                                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->Crear Usuario
-                                        </button>
-                                    </div>
-                                    <!--end::Add user-->
-                                </div>
-                                <!--end::Toolbar-->
-                            </div>	
-						</div>
-
-                        <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded" id="kt_content-list">
-                            
-
-                                        <div class="table-responsive">
-                                            <table id="usersTable" class="table mt-2 table-striped table-bordered" style="width:100%;">
-                                                <thead class="">
-                                                    <tr class="">
-                                                        <th>Id</th>
-                                                        <th>Nombre</th>
-                                                        <th>Email</th>
-                                                        <th>Rol</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-
+						<div class="content flex-column-fluid" id="kt_content">
+							
+							<div class="card-px text-center py-10">
+								<!--begin::Title-->
+								<h2 class="fs-2x fw-bolder mb-10">Bienvenido!</h2>
+								<!--end::Title-->
+								<!--begin::Description-->
+								<p class="text-gray-400 fs-4 fw-bold mb-10">Bienvenido al sistema de gestión de reclutamiento y gestión de recursos humanos de Fortuneware sKautee.</p>
+								<!--end::Description-->
+								<!--begin::Action-->
+								<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Buscar Consultores</a>
+								<!--end::Action-->
+							</div>
+							
+							<div class="text-center px-4">
+								<img class="mw-100 mh-300px" alt="" src="/img/17.png">
+							</div>
+										
 						</div>
 						<!--end::Content-->
 
-                        <div class="modal fade" id="Modal CRUD" tabindex="-1" role="dialog"></div>
-
-                        <!--begin::Footer-->
                         <div class="footer pt-10 pb-5 d-flex flex-column flex-md-row flex-stack" id="kt_footer">
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted fw-bold me-1">2022©</span>
@@ -300,7 +202,6 @@
 								</li>
 							</ul>
 						</div>
-                        <!--end::Footer-->
 
 					</div>
 					<!--end::Wrapper-->
@@ -314,60 +215,8 @@
     </div>
     <!--end::Root-->
 
-    <div class="modal fade" id="modalUserWin" tabindex="-1" role="dialog" aria-labelledby="userModalLbl" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title fw-bolder">Usuarios</h2>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                  <form id="formUsuarios" action="">
-                      <div class="modal-body">
-                        <input type="hidden" id="usrFormPasswordSet" name="usrFormPasswordSet" value="****">
-                            <div class="form-group">
-                                <label for="usrFormFirstName" class="required form-col-label">Nombre</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="usrFormFirstName">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormLastName" class="required form-col-label">Apellido</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellidos" value="" id="usrFormLastName">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormAlias" class="required form-col-label">Alias</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Alias" value="" id="usrFormAlias">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormEmail" class="required form-col-label">Email</label>
-                                <input type="email" name="usrFormEmail" id="usrFormEmail" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="">
-
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormPassword" class="required form-col-label">Clave:</label>
-                                <input type="password" class="form-control form-control-solid mb-3 mb-lg-0" id="usrFormPassword" placeholder="Ingrese una clave">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormPassword2" class="required form-col-label">Repita la clave:</label>
-                                <input type="password" class="form-control form-control-solid mb-3 mb-lg-0" id="usrFormPassword2" placeholder="Repita la clave ingresada">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormRole" class="required form-col-label">Rol</label>
-                                <select id="usrFormRole" class="form-control form-control-solid form-select " aria-label="Select Rol">
-                                    <option value="0">--Selecciona un rol--</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Reclutador</option>
-                                    
-                                </select>
-                            </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
-                      </div>
-                  </form>
-
-              </div>
-            </div>
-    </div>
+	<!-- JQuery jQuery Core 3.6.0 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -379,16 +228,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-
-    <!-- JQuery jQuery Core 3.6.0 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-    <!-- DataTables 1.11.5 -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
-    <!-- Alertify -->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-    <script src="/scripts/user-management.js"></script>
+    <script src="/scripts/dashboard.js"></script>
 </body>
 </html>

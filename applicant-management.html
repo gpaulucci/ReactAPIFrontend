@@ -10,10 +10,14 @@
     <link href="/styles/style.buldle.css" rel="stylesheet" >
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
+    <link rel="stylesheet" href="/styles/applicant-management.css"/>
+
     <!-- Alertify min CSS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <!-- Default theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
     <style>
         a.editor-create {
@@ -123,7 +127,7 @@
                                                     </span>
                                                 </span>
                                                 
-                                                <span class="menu-title"><a class="menu-link py-3" href="#">Usuarios</a></span>
+                                                <span class="menu-title"><a class="menu-link py-3" href="user-management.html">Usuarios</a></span>
                                                 <span class="menu-arrow d-lg-none"></span>
                                             </span>
                                         </div>
@@ -137,34 +141,8 @@
 
                             <!--begin::Toolbar wrapper-->
 							<div class="d-flex align-items-stretch flex-shrink-0">
-								<!--begin::Theme mode-->
-								<div class="d-flex align-items-center ms-1 ms-lg-2">
-									<a href="#" class="btn btn-icon btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-										<i class="fonticon-sun fs-2"></i>
-										<i class="fonticon-moon fs-2 d-none"></i>
-									</a>
-									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-200px" data-kt-menu="true">
-										<div class="menu-item px-3 my-1">
-											<a href="../../demo5/dist/?page=index" class="menu-link px-3 active">
-												<span class="menu-icon">
-													<i class="fonticon-sun fs-2"></i>
-												</span>
-												<span class="menu-title">Light</span>
-											</a>
-										</div>
-										<div class="menu-item px-3 my-1">
-											<a href="../../demo5/dist/?page=index&amp;mode=dark" class="menu-link px-3">
-												<span class="menu-icon">
-													<i class="fonticon-moon fs-2"></i>
-												</span>
-												<span class="menu-title">Dark</span>
-											</a>
-										</div>
-									</div>
-								</div>
-								<!--end::Theme mode-->
-								<!--begin::User-->
-								<div class="d-flex align-items-center ms-lg-5" id="kt_header_user_menu_toggle">
+								<!--begin::Applicant-->
+								<div class="d-flex align-items-center ms-lg-5" id="kt_header_applicant_menu_toggle">
 									<div class="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 										<div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
 											<span class="text-muted fs-7 fw-bold lh-1 mb-2">Hola</span>
@@ -176,7 +154,7 @@
 										</div-->
 									</div>
 								</div>
-								<!--end::User -->
+								<!--end::Applicant -->
 								<!--begin::Header menu toggle-->
                                 <div class="d-flex d-lg-none align-items-center me-n2" title="Show header menu">
 									<button class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_header_menu_mobile_toggle">
@@ -209,7 +187,7 @@
                         <div class="toolbar d-flex flex-stack flex-wrap mb-5 mb-lg-7" id="kt_toolbar">
                             <div class="page-title d-flex flex-column py-1">
                                 <h1 class="d-flex align-items-center my-1">
-                                    <span class="text-dark fw-bolder fs-1">Usuarios</span>
+                                    <span class="text-dark fw-bolder fs-1">Candidatos</span>
                                 </h1>
                                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                                     <li class="breadcrumb-item text-muted">
@@ -218,7 +196,7 @@
                                     <li class="breadcrumb-item">
                                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
                                     </li>
-                                    <li class="breadcrumb-item text-dark">Usuarios</li>
+                                    <li class="breadcrumb-item text-dark">Candidatos</li>
                                 </ul>
                             </div>
                         </div>
@@ -237,10 +215,10 @@
                                         </div>
                                         <!--end::Search-->
                                     </div>
-                                    <!--begin::Add user-->
+                                    <!--begin::Add applicant-->
                                     <div class="card-title">
-                                        <button type="button" class="btn btn-primary" id="btnNewUser" data-bs-toggle="modal" data-bs-target="#modalUserWin">
-                                        <!--button type="button" class="btn btn-primary" id="btnNewUser" data-bs-toggle="modal"-->
+                                        <button type="button" class="btn btn-primary" id="btnNewApplicant" data-bs-toggle="modal" data-bs-target="#modalApplicantWin">
+                                        <!--button type="button" class="btn btn-primary" id="btnNewApplicant" data-bs-toggle="modal"-->
                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                             <span class="svg-icon svg-icon-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -248,10 +226,10 @@
                                                     <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black"></rect>
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->Crear Usuario
+                                            <!--end::Svg Icon-->Crear Candidato
                                         </button>
                                     </div>
-                                    <!--end::Add user-->
+                                    <!--end::Add applicant-->
                                 </div>
                                 <!--end::Toolbar-->
                             </div>	
@@ -261,13 +239,14 @@
                             
 
                                         <div class="table-responsive">
-                                            <table id="usersTable" class="table mt-2 table-striped table-bordered" style="width:100%;">
+                                            <table id="applicantsTable" class="table mt-2 table-striped table-bordered" style="width:100%;">
                                                 <thead class="">
                                                     <tr class="">
                                                         <th>Id</th>
-                                                        <th>Nombre</th>
+                                                        <th>Nombre/Apellido</th>
                                                         <th>Email</th>
-                                                        <th>Rol</th>
+                                                        <th>Perfil</th>
+                                                        <th>Keywords</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -314,49 +293,51 @@
     </div>
     <!--end::Root-->
 
-    <div class="modal fade" id="modalUserWin" tabindex="-1" role="dialog" aria-labelledby="userModalLbl" aria-hidden="true">
+    <div class="modal fade" id="modalApplicantWin" tabindex="-1" role="dialog" aria-labelledby="applicantModalLbl" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title fw-bolder">Usuarios</h2>
+                  <h2 class="modal-title fw-bolder">Candidato</h2>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                  <form id="formUsuarios" action="">
+                  <form id="formCandidatos" action="">
                       <div class="modal-body">
-                        <input type="hidden" id="usrFormPasswordSet" name="usrFormPasswordSet" value="****">
+                        <input type="hidden" id="appFormPasswordSet" name="appFormPasswordSet" value="****">
                             <div class="form-group">
-                                <label for="usrFormFirstName" class="required form-col-label">Nombre</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="usrFormFirstName">
+                                <label for="appFormFirstName" class="required form-col-label">Nombre</label>
+                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="appFormFirstName">
                             </div>
                             <div class="form-group">
-                                <label for="usrFormLastName" class="required form-col-label">Apellido</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellidos" value="" id="usrFormLastName">
+                                <label for="appFormLastName" class="required form-col-label">Apellido</label>
+                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellidos" value="" id="appFormLastName">
                             </div>
                             <div class="form-group">
-                                <label for="usrFormAlias" class="required form-col-label">Alias</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Alias" value="" id="usrFormAlias">
+                                <label for="appFormEmail" class="required form-col-label">Email</label>
+                                <input type="email" name="appFormEmail" id="appFormEmail" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="">
                             </div>
                             <div class="form-group">
-                                <label for="usrFormEmail" class="required form-col-label">Email</label>
-                                <input type="email" name="usrFormEmail" id="usrFormEmail" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="">
+                                <label for="appFormProfile" class="required form-col-label">Perfil</label>
+                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Perfil" value="" id="appFormProfile">
+                            </div>
+                            <div class="form-group">
+                                <label for="appFormKeywords" class="required form-col-label">Palabras clave</label>
+                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Palabras clave" value="" id="appFormKeywords">
+                            </div>
+                            <div class="form-group">
+                                <label for="appFormCVDescription" class="required form-col-label">Descr.CV</label>
+                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Descripción del CV" value="" id="appFormCVDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="appFormRating" class="required form-col-label">Rating</label>
+                                <input type="hidden" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Rating" value="" id="appFormRating">
 
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormPassword" class="required form-col-label">Clave:</label>
-                                <input type="password" class="form-control form-control-solid mb-3 mb-lg-0" id="usrFormPassword" placeholder="Ingrese una clave">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormPassword2" class="required form-col-label">Repita la clave:</label>
-                                <input type="password" class="form-control form-control-solid mb-3 mb-lg-0" id="usrFormPassword2" placeholder="Repita la clave ingresada">
-                            </div>
-                            <div class="form-group">
-                                <label for="usrFormRole" class="required form-col-label">Rol</label>
-                                <select id="usrFormRole" class="form-control form-control-solid form-select " aria-label="Select Rol">
-                                    <option value="0">--Selecciona un rol--</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Reclutador</option>
-                                    
-                                </select>
+                                <div class="rating">
+                                    <input type="radio" name="star" id="star5"><label for="star5"></label>
+                                    <input type="radio" name="star" id="star4"><label for="star4"></label>
+                                    <input type="radio" name="star" id="star3"><label for="star3"></label>
+                                    <input type="radio" name="star" id="star2"><label for="star2"></label>
+                                    <input type="radio" name="star" id="star1"><label for="star1"></label>
+                                </div>
                             </div>
                       </div>
                       <div class="modal-footer">
@@ -389,6 +370,6 @@
     <!-- Alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-    <script src="/scripts/user-management.js"></script>
+    <script src="/scripts/applicant-management.js"></script>
 </body>
 </html>

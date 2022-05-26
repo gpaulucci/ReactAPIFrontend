@@ -1,0 +1,45 @@
+
+.rating {
+    transform: translate(-50%, -50%) rotateY(180deg);
+}
+.rating input {
+    /* display: none; */
+    display: none;
+}
+
+.rating label {
+    display: block;
+    cursor: pointer;
+    width: 25px;
+    background: #ffffff;
+}
+
+.rating label:before {
+    content: '\f005';
+    font-family: "fontAwesome";
+    position: relative;
+    display: block;
+    font-size: 15px;
+    color: #cccc;
+    top: 22px;
+}
+.rating label:after {
+    content: '\f005';
+    font-family: "fontAwesome";
+    position: relative;
+    display: block;
+    font-size: 15px;
+    color: #fbc634;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+    opacity: 1;
+}
+
+
