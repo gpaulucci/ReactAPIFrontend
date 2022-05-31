@@ -6,6 +6,10 @@ $(document).ready(function(){
 
   document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
   $(".page-loader").css("display", "none");
+
+  if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
+    document.getElementById('UserMnuOption').classList.add("d-none");
+  }
 })
 
 /* setInterval((x => { */

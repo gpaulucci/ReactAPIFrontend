@@ -19,6 +19,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> <!-- tags X icon (close) -->
+
+    <link rel="stylesheet" href="styles/tagify.css"/>
     <style>
         a.editor-create {
         display: inline-block;
@@ -116,7 +119,7 @@
 											</span>
 										</div>
 
-                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+                                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1" id="UserMnuOption">
                                             <span class="menu-link py-3">
                                                 <span class="menu-icon">
                                                     <span class="svg-icon svg-icon-2">
@@ -302,7 +305,8 @@
                 </div>
                   <form id="formCandidatos" action="">
                       <div class="modal-body">
-                        <input type="hidden" id="appFormPasswordSet" name="appFormPasswordSet" value="****">
+                        <input type="hidden" id="appFormOwnerUserId" name="appFormOwnerUserId" value="0">
+                        <input type="hidden" id="appFormUIdFileResume" name="appFormUIdFileResume" value="">
                             <div class="form-group">
                                 <label for="appFormFirstName" class="required form-col-label">Nombre</label>
                                 <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="appFormFirstName">
@@ -320,8 +324,16 @@
                                 <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Perfil" value="" id="appFormProfile">
                             </div>
                             <div class="form-group">
-                                <label for="appFormKeywords" class="required form-col-label">Palabras clave</label>
-                                <input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Palabras clave" value="" id="appFormKeywords">
+                                <label for="appFormKeywords" class="required form-col-label">Palabras clave</label>   
+                                <input class="form-control form-control-solid mb-3 mb-lg-0" value="" id="kt_tagify_1">                     
+                            </div>
+                            <div class="form-group">
+                                <label for="appInpFile" class="form-col-label">CV (archivo .PDF): </label>
+                                
+
+                                <!--button class="form-control form-control-solid mb-3 mb-lg-0" onclick="document.getElementById('inpFile').click()">Seleccione el archivo CV</button-->
+                                <input type="file" id="inpFile" name="inpFile" class="form-control form-control-solid mb-3 mb-lg-0"  accept="application/pdf">
+
                             </div>
                             <div class="form-group">
                                 <label for="appFormCVDescription" class="required form-col-label">Descr.CV</label>
@@ -369,7 +381,8 @@
 
     <!-- Alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+    
+    <script src="scripts/tagify.min.js"></script>
     <script src="/scripts/applicant-management.js"></script>
 </body>
 </html>

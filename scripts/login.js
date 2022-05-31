@@ -25,6 +25,8 @@ clickLogin = (e) => {
           //alert("You are logged in.");
           window.sessionStorage.setItem('APIToken', JSON.stringify(result.token));
           window.sessionStorage.setItem('APIName', result.first_name  + ' ' + result.last_name);
+          window.sessionStorage.setItem('APIUserID', result.id_user);
+          window.sessionStorage.setItem('APIUserRole', result.role);
           window.sessionStorage.setItem('APIServer', cApiServer);
           location.href = 'home.html';
       } else {
