@@ -52,7 +52,7 @@
                                     <!--begin::Menu-->
                                     <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch">
                                         
-                                        <div class="menu-item  menu-lg-down-accordion me-lg-1">
+                                        <div class="menu-item  menu-lg-down-accordion me-lg-1 menu-item-applicant">
                                             <span class="menu-link py-3">
                                                 <span class="menu-icon">
                                                     <span class="svg-icon svg-icon-2">
@@ -63,10 +63,29 @@
                                                     </span>
                                                 </span>
 
-                                                <span class="menu-title"><a class="menu-link py-3" href="applicant-management.html">Candidatos</a></span>
+                                                <span class="menu-title"><a class="menu-link py-3" href="#">Candidatos</a></span>
                                                 <span class="menu-arrow d-lg-none"></span>
                                             </span>
                                         </div>
+
+										<div id="kt_modal_app_mng" class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px" data-popper-placement="bottom-start" style="z-index: 105; position: fixed; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(197px, 93px, 0px);">
+											<div class="menu-item">
+												<a class="menu-link py-3" href="applicant-management.html">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">Mis Candidatos</span>
+												</a>
+											</div>
+											<div class="menu-item">
+												<a class="menu-link py-3" href="applicant-search.html">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">Buscar</span>
+												</a>
+											</div>
+										</div>
 
                                         <div class="menu-item menu-lg-down-accordion me-lg-1">
                                             <span class="menu-link py-3">
@@ -174,7 +193,7 @@
 								<p class="text-gray-400 fs-4 fw-bold mb-10">Bienvenido al sistema de gestión de reclutamiento y gestión de recursos humanos de Fortuneware sKautee.</p>
 								<!--end::Description-->
 								<!--begin::Action-->
-								<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Buscar Consultores</a>
+								<a href="applicant-search.html" class="btn btn-primary">Buscar candidatos</a>
 								<!--end::Action-->
 							</div>
 							

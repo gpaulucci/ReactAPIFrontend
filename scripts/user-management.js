@@ -28,6 +28,12 @@ btnNewUser.addEventListener('click', ()=> {
   option = 'create';
 })  */
 
+document.querySelector('.menu-item-applicant').addEventListener('click', (e) => {
+
+  var element = document.getElementById('kt_modal_app_mng');
+  element.classList.toggle("show");
+});
+
 $(document).ready(function(){
   if(!window.sessionStorage.getItem('APIToken') || window.sessionStorage.getItem('APIToken') == null || window.sessionStorage.getItem('APIToken') == "null"  ) {
     location.href = 'index.html';

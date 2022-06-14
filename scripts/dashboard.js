@@ -1,16 +1,32 @@
 
 
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+};
+
 $(document).ready(function(){
   if(!window.sessionStorage.getItem('APIToken') || window.sessionStorage.getItem('APIToken') == null || window.sessionStorage.getItem('APIToken') == "null"  ) 
     location.href = 'index.html';
 
-  document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
+  //document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
   $(".page-loader").css("display", "none");
 
   if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
     document.getElementById('UserMnuOption').classList.add("d-none");
   }
 })
+
+document.querySelector('.menu-item-applicant').addEventListener('click', (e) => {
+
+  var element = document.getElementById('kt_modal_app_mng');
+  element.classList.toggle("show");
+});
 
 /* setInterval((x => { */
 /*    fetch("https://localhost:44383/api/Token"

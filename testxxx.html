@@ -11,7 +11,21 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 </head>
 <body id="kt_body" class="page-loading-enabled header-fixed header-tablet-and-mobile-fixed sidebar-enabled">
-
+    <!--begin::loader-->
+    <div class="page-loader">
+        <span class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </span>
+    </div>
+    <!--end::Loader-->
+    <form id="formCandidatos" action="">
+        <div class="form-group">
+            <label for="appInpFile" class="form-col-label">CV (archivo .PDF): </label>            
+            <input type="file" id="inpFile" name="inpFile" class="form-control form-control-solid mb-3 mb-lg-0"  accept="application/pdf">
+            <input type="text" id="inpFileName" name="inpFileName" class="form-control form-control-solid mb-3 mb-lg-0 ">
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+    </form>
     <div id="retJson">
 
     </div>
