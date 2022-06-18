@@ -1,3 +1,4 @@
+/* estilos del las estrellas del ranking */
 .rating {
     transform: translate(-50%, -50%) rotateY(180deg);
 }
@@ -33,7 +34,7 @@
 
 }
 
-/* tag list styles */
+/* estilos de los tags (conocimientos, fuentes, idiomas, etc) */
 .tag-container .tag {
     padding: 5px;
     border: 1px solid #ccc;

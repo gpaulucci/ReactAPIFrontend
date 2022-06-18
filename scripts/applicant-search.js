@@ -27,6 +27,43 @@ const on = (element, event, selector, handler) => {
   })
 }
 
+
+
+document.querySelector('.lnk-download').addEventListener('click', (e) => {
+  try {
+  fetch(window.sessionStorage.getItem('APIServer') + "UplFiles/" + fileUID, {
+    method: 'GET',
+    headers: {
+      //Accept: "application/json",
+      Authorization: "Bearer " + JSON.parse(window.sessionStorage.getItem('APIToken'))
+    }
+  }).then( 
+    fres => fres.blob()
+  ).then((retBlob) => {
+    download(retBlob, inpFileName.value);
+  })
+  .catch(error => {
+    alertify.defaults.glossary.title = 'Error';
+    alertify.defaults.glossary.ok = 'Ok';    
+
+    if(error.status == 404) {
+        alertify.alert("El archivo no pudo encontrarse.", function(){
+          alertify.message('OK');
+        })
+    } else {
+      alertify.alert("La operación no pudo completarse. El servidor no pudo responder a la solicitud. (Mensaje del servidor: " + error.message + ")", function(){
+        alertify.message('OK');
+      });
+    }
+      
+    console.log(error)
+  });
+  } catch (e) {
+    console.log(e.message);
+  }  
+
+});
+
 // ******************************************************************
 // procedimiento que se ejecuta al tarminar de cargar la página
 // ******************************************************************
@@ -81,7 +118,7 @@ $(document).ready(function(){
         } },
         {"data": "email"},
         {"data": "profile"},
-        {"data": "keywords"},
+        {"data": "skills"},
         {"data": null, className: "dt-center editor-edit", orderable: false}
       ],
       responsive: true,
@@ -91,9 +128,42 @@ $(document).ready(function(){
     $(".page-loader").css("display", "none");
   }
 
-  var input1 = document.getElementById("kt_tagify_1");
+  // conocimientos
+  var input1 = document.querySelector("#kt_tagify_1");
   new Tagify(input1, {
-      whitelist: ["SAP SD","SAP MM","SAP FI","SAP CO","SAP FICO","SAP PP","SAP QM","SAP WM","SAP EWM","SAP CAR","SAP SRM","SAP CRM","ABAP","SAP PROJECT MANAGER","SAP PM","SAP MII","SAP QM","SAP REAL STATE","SAP RETAIL","SAP SUCCESS FACTORS","SAP ARIBA","SAP LETRA","SAP BW","SAP BO","SAP PI","SAP PO","SAP PI PO","SAP PS","SAP HCM","ORACLE WMS","ORACLE scm","ORACLE fi","ORACLE hrm","ORACLE sd","ORACLE bi","ORACLE ebs","ORACLE cloud","ORACLE developer","ORACLE crm","ORACLE order management","ORACLE precruitment","java","angular","sql","react","spring","core","manual","developer","oracle","program managers","IPC","asp","automation","funcional","datastage", "JAVASCRIPT"],
+      whitelist: ["SAP SD","SAP MM","SAP FI","SAP CO","SAP FICO","SAP PP","SAP QM","SAP WM","SAP EWM","SAP CAR","SAP SRM","SAP CRM","ABAP","SAP PROJECT MANAGER","SAP PM","SAP MII","SAP QM","SAP REAL STATE","SAP RETAIL","SAP SUCCESS FACTORS","SAP ARIBA","SAP LETRA","SAP BW","SAP BO","SAP PI","SAP PO","SAP PI PO","SAP PS","SAP HCM","ORACLE WMS","ORACLE scm","ORACLE fi","ORACLE hrm","ORACLE sd","ORACLE bi","ORACLE ebs","ORACLE cloud","ORACLE developer","ORACLE crm","ORACLE order management","ORACLE precruitment","java","angular","sql","react","spring","core","manual","developer","oracle","program managers","IPC","asp","automation","funcional","datastage"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // perfil
+  var input2 = document.querySelector("#kt_tagify_2");
+  new Tagify(input2, {
+      whitelist: ["Architect","Analist","Project Manager"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // idiomas
+  var input3 = document.querySelector("#kt_tagify_3");
+  new Tagify(input3, {
+      whitelist: ["Ingles","Español","Portugues","Chino","Frances","Aleman"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // nacionalidad
+  var input4 = document.querySelector("#kt_tagify_4");
+  new Tagify(input4, {
+      whitelist: ["Mexicana","Argentina","Italiana","Española","Brasilera","Alemana"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // pasaportes
+  var input5 = document.querySelector("#kt_tagify_5");
+  new Tagify(input5, {
+      whitelist: ["B1/B2","GreenCard","Europa","México","FM3"],
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
@@ -124,14 +194,20 @@ on(document, 'click', '.btnEditar', e => {
     appFormFirstName.value = retJson.data.firstName;
     appFormLastName.value = retJson.data.lastName;
     appFormEmail.value = retJson.data.email;
-    appFormProfile.value = retJson.data.profile;
-    appFormEnglishLvl.value = retJson.data.englishLevel,
-    appFormCVDescription.value = retJson.data.resumeDesc;
-    //appFormRating.value = retJson.data.ranking;
+    appFormNotes.value = retJson.data.notes;
+    appFormRating.value = retJson.data.ranking;
     appFormOwnerUserId.value = retJson.data.idOwner;
+    appFormWsp.value = retJson.data.phone;
+    appFormSource.value = retJson.data.source;
+    appFormCreatedUserId.value = retJson.data.createdIdUser;
+    appFormCreatedDateTime.value = retJson.data.createdDateTime.toString()+'Z';
     fileUID = retJson.data.uIdFileResume==''?'00000000-0000-0000-0000-000000000000':retJson.data.uIdFileResume;
 
-    document.getElementById("kt_tagify_1").value = retJson.data.keywords;
+    document.getElementById("kt_tagify_1").value = retJson.data.skills;
+    document.getElementById("kt_tagify_2").value = retJson.data.profile;
+    document.getElementById("kt_tagify_3").value = retJson.data.languages;
+    document.getElementById("kt_tagify_4").value = retJson.data.nationality;
+    document.getElementById("kt_tagify_5").value = retJson.data.passport;
 
     star1.classList.remove("unchecked", "checked");
     star2.classList.remove("unchecked", "checked");

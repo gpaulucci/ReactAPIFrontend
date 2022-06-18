@@ -253,7 +253,7 @@
                                                         <th>Nombre/Apellido</th>
                                                         <th>Email</th>
                                                         <th>Perfil</th>
-                                                        <th>Keywords</th>
+                                                        <th>Conocimientos</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -301,61 +301,136 @@
     <!--end::Root-->
 
     <div class="modal fade" id="modalApplicantWin" tabindex="-1" role="dialog" aria-labelledby="applicantModalLbl" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered mw-1000px">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title fw-bolder">Candidato</h2>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h2 class="modal-title fw-bolder">Candidato</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                  <form id="formCandidatos" action="">
-                      <div class="modal-body">
-                        <input type="hidden" id="appFormOwnerUserId" name="appFormOwnerUserId" value="0">
-                            <div class="form-group">
-                                <label for="appFormFirstName" class="form-col-label">Nombre</label>
-                                <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="appFormFirstName">
+                <div class="modal-body scroll-y mx-5">
+                    <form id="formCandidatos" action="">
+                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 555px;">
+                            <input type="hidden" id="appFormOwnerUserId" name="appFormOwnerUserId" value="0">
+                            <input type="hidden" id="appFormCreatedUserId" name="appFormCreatedUserId" value="0">
+                            <input type="hidden" id="appFormCreatedDateTime" name="appFormCreatedDateTime" value="0">
+
+                            <div class="row g-5">
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label for="appFormFirstName" class="form-col-label">Nombres</label>
+                                        <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombres" value="" id="appFormFirstName">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label for="appFormEmail" class="form-col-label">Email</label>
+                                        <input type="email" readonly name="appFormEmail" id="appFormEmail" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="">
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="appFormLastName" class="form-col-label">Apellido</label>
-                                <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellidos" value="" id="appFormLastName">
+    
+                            <div class="row g-5">
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label for="appFormLastName" class="form-col-label">Apellidos</label>
+                                        <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Apellidos" value="" id="appFormLastName">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label for="appFormWsp" class="required form-col-label">WhatsApp</label>
+                                        <input type="tel" name="appFormWsp" id="appFormWsp" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="[+99] 999-99999999" value="" readonly>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="row g-5">
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label for="appFormSource" class="required form-col-label">Fuente</label>
+
+                                        <select class="form-control form-control-solid form-select " aria-label="Seleccion" id="appFormSource" readonly>
+                                            <option value="OCC">OCC</option>
+                                            <option value="INDEED">INDEED</option>
+                                            <option value="COMPUTRABAJO">COMPUTRABAJO</option>
+                                            <option value="REFERIDO">REFERIDO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="fv-row mb-5">
+                                        <label class="required form-col-label">Conocimientos</label>   
+                                        <input class="form-control form-control-solid mb-3 mb-lg-0" value="" id="kt_tagify_1" readonly>   
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="appFormEmail" class="form-col-label">Email</label>
-                                <input type="email" readonly name="appFormEmail" id="appFormEmail" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="appFormProfile" class="form-col-label">Perfil</label>
-                                <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Perfil" value="" id="appFormProfile">
-                            </div>
-                            <div class="form-group">
-                                <label for="appFormEnglishLvl" class="form-col-label">Nivel de Inglés</label>
-                                <!--input type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Inglés" value="" id="appFormEnglishLvl"-->
-                                <select class="form-control form-control-solid mb-3 mb-lg-0" disabled="true" aria-label=".form-select-lg example" id="appFormEnglishLvl">
-                                    <option value="0" selected>seleccione un nivel de inglés</option>
-                                    <option value="1">Alto</option>
-                                    <option value="2">Medio</option>
-                                    <option value="3">Bajo</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="appFormKeywords" class="form-col-label">Palabras clave</label>   
-                                <input readonly class="form-control form-control-solid mb-3 mb-lg-0" value="" id="kt_tagify_1">                     
-                            </div>
-                            <div class="form-group">
+
+                            <div class="form-group mt-5">
                                 <label for="appInpFile" class="form-col-label">CV (archivo .PDF): </label>
                                 
 
                                 <!--button class="form-control form-control-solid mb-3 mb-lg-0" onclick="document.getElementById('inpFile').click()">Seleccione el archivo CV</button-->
                                 <!--input type="file" id="inpFile" name="inpFile" class="form-control form-control-solid mb-3 mb-lg-0"  accept="application/pdf"-->
                                 <input type="text" id="inpFileName" name="inpFileName" class="form-control form-control-solid mb-3 mb-lg-0" readonly>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<a class="mb-3 mb-lg-0 lnk-download" href="#">Descargar archivo</a>
 
                             </div>
-                            <div class="form-group">
-                                <label for="appFormCVDescription" class="form-col-label">Descr.CV</label>
-                                <input type="text" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Descripción del CV" value="" id="appFormCVDescription">
+
+                            <div class="row g-5 g-xxl-8 mt-5">
+                                <div class="col-12">
+                                    <div class="fv-row mb-7">
+                                        <label for="appFormNotes" class="required fw-bold fs-6 mb-2">Notas</label>
+                                        <textarea class="form-control form-control-solid" aria-label="" readonly id="appFormNotes" placeholder="Otros conocimientos no definidos como etiquetas"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
+
+                            <div class="card card-flush mb-5 mb-lg-5">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2 class="fw-bolder">Datos complementarios</h2>
+                                    </div>
+                                    <!--begin::Card title-->
+                                </div>
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0">
+                                    <!--begin::Custom fields-->
+                                    <div class="d-flex flex-column fv-row">
+                                        <div class="row g-5">
+                                            <div class="col-xl-6">
+                                                <div class="fv-row mb-6">
+                                                    <label class="fw-bold fs-6 mb-2">Perfil</label>
+                                                    <input class="form-control form-control-solid" value="" id="kt_tagify_2" readonly>
+                                                </div>
+                                                <div class="fv-row mb-6">
+                                                    <label class="fw-bold fs-6 mb-2">Idiomas</label>
+                                                    <input class="form-control form-control-solid" value="" id="kt_tagify_3" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="fv-row mb-6">
+                                                    <label class="fw-bold fs-6 mb-2">Nacionalidad</label>
+                                                    <input class="form-control form-control-solid" value="" id="kt_tagify_4" readonly>
+                                                </div>
+                                                <div class="fv-row mb-6">
+                                                    <label class="fw-bold fs-6 mb-2">Pasaportes / Visados</label>
+                                                    <input class="form-control form-control-solid" value="" id="kt_tagify_5" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Custom fields-->
+                                </div>
+                                <!--end::Card body-->
+                            </div>
+
+                            <div class="form-group d-none">
                                 <label for="appFormRating" class="form-col-label">Rating</label>
-                                <!--input type="hidden" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Rating" value="" id="appFormRating"-->
+                                <input type="hidden" readonly class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Rating" value="" id="appFormRating">
 
                                 <div class="rating">
                                     <label id="star5"></label>
@@ -365,15 +440,16 @@
                                     <label id="star1"></label>
                                 </div>
                             </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                      </div>
-                  </form>
-
-              </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
     </div>
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 

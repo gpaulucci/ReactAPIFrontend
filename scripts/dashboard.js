@@ -14,7 +14,7 @@ $(document).ready(function(){
   if(!window.sessionStorage.getItem('APIToken') || window.sessionStorage.getItem('APIToken') == null || window.sessionStorage.getItem('APIToken') == "null"  ) 
     location.href = 'index.html';
 
-  //document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
+  // document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
   $(".page-loader").css("display", "none");
 
   if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {

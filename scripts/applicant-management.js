@@ -1,6 +1,4 @@
 
-//let download = require('/scripts/download.js');
-
 const applicantWinModal = new bootstrap.Modal(document.getElementById('modalApplicantWin'));
 
 let option = '';
@@ -91,6 +89,7 @@ $(document).ready(function(){
     if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
       document.getElementById('UserMnuOption').classList.add("d-none");
     }
+    
     applicantsTable = $("#applicantsTable").DataTable({
       processing: true,
       "ajax":{
@@ -132,7 +131,7 @@ $(document).ready(function(){
         } },
         {"data": "email"},
         {"data": "profile"},
-        {"data": "keywords"},
+        {"data": "skills"},
         { data: null, render: function ( data, type, row ) {
           return new Date(data.updatedDateTime.toString()+'Z').toLocaleDateString();
         } },
@@ -145,12 +144,46 @@ $(document).ready(function(){
     $(".page-loader").css("display", "none");
   }
 
-  var input1 = document.getElementById("kt_tagify_1");
+  // conocimientos
+  var input1 = document.querySelector("#kt_tagify_1");
   new Tagify(input1, {
-      whitelist: ["SAP SD","SAP MM","SAP FI","SAP CO","SAP FICO","SAP PP","SAP QM","SAP WM","SAP EWM","SAP CAR","SAP SRM","SAP CRM","ABAP","SAP PROJECT MANAGER","SAP PM","SAP MII","SAP QM","SAP REAL STATE","SAP RETAIL","SAP SUCCESS FACTORS","SAP ARIBA","SAP LETRA","SAP BW","SAP BO","SAP PI","SAP PO","SAP PI PO","SAP PS","SAP HCM","ORACLE WMS","ORACLE scm","ORACLE fi","ORACLE hrm","ORACLE sd","ORACLE bi","ORACLE ebs","ORACLE cloud","ORACLE developer","ORACLE crm","ORACLE order management","ORACLE precruitment","java","angular","sql","react","spring","core","manual","developer","oracle","program managers","IPC","asp","automation","funcional","datastage", "JAVASCRIPT"],
+      whitelist: ["SAP SD","SAP MM","SAP FI","SAP CO","SAP FICO","SAP PP","SAP QM","SAP WM","SAP EWM","SAP CAR","SAP SRM","SAP CRM","ABAP","SAP PROJECT MANAGER","SAP PM","SAP MII","SAP QM","SAP REAL STATE","SAP RETAIL","SAP SUCCESS FACTORS","SAP ARIBA","SAP LETRA","SAP BW","SAP BO","SAP PI","SAP PO","SAP PI PO","SAP PS","SAP HCM","ORACLE WMS","ORACLE scm","ORACLE fi","ORACLE hrm","ORACLE sd","ORACLE bi","ORACLE ebs","ORACLE cloud","ORACLE developer","ORACLE crm","ORACLE order management","ORACLE precruitment","java","angular","sql","react","spring","core","manual","developer","oracle","program managers","IPC","asp","automation","funcional","datastage"],
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
+
+  // perfil
+  var input2 = document.querySelector("#kt_tagify_2");
+  new Tagify(input2, {
+      whitelist: ["Architect","Analist","Project Manager"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // idiomas
+  var input3 = document.querySelector("#kt_tagify_3");
+  new Tagify(input3, {
+      whitelist: ["Ingles","Español","Portugues","Chino","Frances","Aleman"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // nacionalidad
+  var input4 = document.querySelector("#kt_tagify_4");
+  new Tagify(input4, {
+      whitelist: ["Mexicana","Argentina","Italiana","Española","Brasilera","Alemana"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
+  // pasaportes
+  var input5 = document.querySelector("#kt_tagify_5");
+  new Tagify(input5, {
+      whitelist: ["B1/B2","GreenCard","Europa","México","FM3"],
+      placeholder: "Escribe para buscar",
+      enforceWhitelist: true
+  });
+
 });
 
 // ******************************************************************
@@ -224,14 +257,20 @@ on(document, 'click', '.btnEditar', e => {
     appFormFirstName.value = retJson.data.firstName;
     appFormLastName.value = retJson.data.lastName;
     appFormEmail.value = retJson.data.email;
-    appFormProfile.value = retJson.data.profile;
-    appFormEnglishLvl.value = retJson.data.englishLevel,
-    appFormCVDescription.value = retJson.data.resumeDesc;
+    appFormNotes.value = retJson.data.notes;
     appFormRating.value = retJson.data.ranking;
     appFormOwnerUserId.value = retJson.data.idOwner;
+    appFormWsp.value = retJson.data.phone;
+    appFormSource.value = retJson.data.source;
+    appFormCreatedUserId.value = retJson.data.createdIdUser;
+    appFormCreatedDateTime.value = retJson.data.createdDateTime.toString()+'Z';
     fileUID = retJson.data.uIdFileResume==''?'00000000-0000-0000-0000-000000000000':retJson.data.uIdFileResume;
 
-    document.getElementById("kt_tagify_1").value = retJson.data.keywords;
+    document.getElementById("kt_tagify_1").value = retJson.data.skills;
+    document.getElementById("kt_tagify_2").value = retJson.data.profile;
+    document.getElementById("kt_tagify_3").value = retJson.data.languages;
+    document.getElementById("kt_tagify_4").value = retJson.data.nationality;
+    document.getElementById("kt_tagify_5").value = retJson.data.passport;
 
     applicantWinModal.show();
 
@@ -311,12 +350,41 @@ formCandidatos.addEventListener('submit', (e) => {
   if (star4.checked) appFormRating.value = "4";
   if (star5.checked) appFormRating.value = "5";
 
-  var keyWordsTags = '';
-  var obj = JSON.parse(document.getElementById("kt_tagify_1").value);
-  for(var i in obj)
-    keyWordsTags += obj[i].value + ',';
+  var skillsTags = ''; // conocimientos
+  var profileTags = ''; // perfil
+  var languagesTags = ''; // idiomas
+  var nationalityTags = ''; // nacionalidad
+  var passportTags = ''; // pasaporte
 
-  keyWordsTags = keyWordsTags.substr(0, keyWordsTags.length-1);
+  var obj1 = JSON.parse(document.getElementById("kt_tagify_1").value);
+  for(var i1 in obj1)
+    skillsTags += obj1[i1].value + ',';
+
+  skillsTags = skillsTags.substr(0, skillsTags.length-1);
+
+  var obj2 = JSON.parse(document.getElementById("kt_tagify_2").value);
+  for(var i2 in obj2)
+    profileTags += obj2[i2].value + ',';
+
+  profileTags = profileTags.substr(0, profileTags.length-1);
+
+  var obj3 = JSON.parse(document.getElementById("kt_tagify_3").value);
+  for(var i3 in obj3)
+    languagesTags += obj3[i3].value + ',';
+
+  languagesTags = languagesTags.substr(0, languagesTags.length-1);
+
+  var obj4 = JSON.parse(document.getElementById("kt_tagify_4").value);
+  for(var i4 in obj4)
+    nationalityTags += obj4[i4].value + ',';
+
+  nationalityTags = nationalityTags.substr(0, nationalityTags.length-1);
+
+  var obj5 = JSON.parse(document.getElementById("kt_tagify_5").value);
+  for(var i5 in obj5)
+    passportTags += obj5[i5].value + ',';
+
+  passportTags = passportTags.substr(0, passportTags.length-1);
 
   $(".page-loader").css("display", "flex");
   e.preventDefault();
@@ -333,16 +401,22 @@ formCandidatos.addEventListener('submit', (e) => {
           firstName: appFormFirstName.value,
           lastName: appFormLastName.value,
           email: appFormEmail.value,
-          profile: appFormProfile.value,
-          englishLevel: appFormEnglishLvl.value,
-          keywords: keyWordsTags,
-          resumeDesc: appFormCVDescription.value,
+          phone: appFormWsp.value,
+          skills: skillsTags,
+          profile: profileTags,
+          languages: languagesTags,
+          nationality: nationalityTags,
+          passport: passportTags,
+          source: appFormSource.value,
+          notes: appFormNotes.value,
           ranking: appFormRating.value,
           idOwner: window.sessionStorage.getItem('APIUserID'),
           status: "active",
           UIdFileResume: fileUID==''?'00000000-0000-0000-0000-000000000000':fileUID,
           updatedIdUser: window.sessionStorage.getItem('APIUserID'),
-          updatedDateTime: new Date().toISOString()
+          updatedDateTime: new Date().toISOString(),
+          createdIdUser: appFormCreatedUserId.value,
+          createdDateTime: new Date(appFormCreatedDateTime.value)
         })
       })
       .then(response => response.json())
@@ -381,16 +455,22 @@ formCandidatos.addEventListener('submit', (e) => {
         firstName: appFormFirstName.value,
         lastName: appFormLastName.value,
         email: appFormEmail.value,
-        profile: appFormProfile.value,
-        englishLevel: appFormEnglishLvl.value,
-        keywords: keyWordsTags,
-        resumeDesc: appFormCVDescription.value,
+        phone: appFormWsp.value,
+        skills: skillsTags,
+        profile: profileTags,
+        languages: languagesTags,
+        nationality: nationalityTags,
+        passport: passportTags,
+        source: appFormSource.value,
+        notes: appFormNotes.value,
         ranking: appFormRating.value,
         idOwner: appFormOwnerUserId.value,
         status: "active",
         uIdFileResume: fileUID==''?'00000000-0000-0000-0000-000000000000':fileUID,
         updatedIdUser: window.sessionStorage.getItem('APIUserID'),
-        updatedDateTime: new Date().toISOString()
+        updatedDateTime: new Date().toISOString(),
+        createdIdUser: appFormCreatedUserId.value,
+        createdDateTime: new Date(appFormCreatedDateTime.value)
       })
     })
     .then(response => response.json())
