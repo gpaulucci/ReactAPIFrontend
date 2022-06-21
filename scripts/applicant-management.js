@@ -127,15 +127,24 @@ $(document).ready(function(){
       "columns": [
         {"data": "id", className: "d-none d-xs-none", orderable: false},
         { data: null, render: function ( data, type, row ) {
-          return data.firstName+' '+data.lastName;
-        } },
-        {"data": "email"},
-        {"data": "profile"},
-        {"data": "skills"},
+          return '<p class="text-gray-800 mb-1">' + data.firstName+' '+data.lastName+'</p><p class="text-gray-400 mb-1 small">'+data.email+'</span></p><p class="text-gray-500 mb-1 small">'+data.phone+'</p>';
+        } , className: "align-middle"},
         { data: null, render: function ( data, type, row ) {
-          return new Date(data.updatedDateTime.toString()+'Z').toLocaleDateString();
-        } },
-        {"data": null, className: "dt-center editor-edit", orderable: false}
+          return '<div class="badge badge-light fw-bolder m-1">' + data.profile.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<div class="badge badge-light fw-bolder m-1">' + data.languages.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<div class="badge badge-light fw-bolder m-1">' + data.skills.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<p class="text-gray-800 mb-1">' + new Date(data.updatedDateTime.toString()+'Z').toLocaleDateString() + '</div>';
+        }, className: "align-middle" },
+        {"data": null, className: "dt-center editor-edit", orderable: false, className: "align-middle"}
       ],
       responsive: true,
       autoWidth: true,
@@ -155,7 +164,7 @@ $(document).ready(function(){
   // perfil
   var input2 = document.querySelector("#kt_tagify_2");
   new Tagify(input2, {
-      whitelist: ["Architect","Analist","Project Manager"],
+      whitelist: ["Project Manager","Architect","Analyst","Art Designer","Consultant","DBA","Full Stack","Programmer","Tester","Leader","Senior","Semisenior","Junior"],
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
@@ -356,35 +365,41 @@ formCandidatos.addEventListener('submit', (e) => {
   var nationalityTags = ''; // nacionalidad
   var passportTags = ''; // pasaporte
 
-  var obj1 = JSON.parse(document.getElementById("kt_tagify_1").value);
-  for(var i1 in obj1)
-    skillsTags += obj1[i1].value + ',';
+  if(!(document.getElementById("kt_tagify_1").value == '')) {
+    var obj1 = JSON.parse(document.getElementById("kt_tagify_1").value);
+    for(var i1 in obj1)
+      skillsTags += obj1[i1].value + ',';
+    skillsTags = skillsTags.substr(0, skillsTags.length-1);
+  }
 
-  skillsTags = skillsTags.substr(0, skillsTags.length-1);
+  
+  if(!(document.getElementById("kt_tagify_2").value == '')) {
+    var obj2 = JSON.parse(document.getElementById("kt_tagify_2").value);
+    for(var i2 in obj2)
+      profileTags += obj2[i2].value + ',';
+    profileTags = profileTags.substr(0, profileTags.length-1);
+  }
 
-  var obj2 = JSON.parse(document.getElementById("kt_tagify_2").value);
-  for(var i2 in obj2)
-    profileTags += obj2[i2].value + ',';
+  if(!(document.getElementById("kt_tagify_3").value == '')) {
+    var obj3 = JSON.parse(document.getElementById("kt_tagify_3").value);
+    for(var i3 in obj3)
+      languagesTags += obj3[i3].value + ',';
+    languagesTags = languagesTags.substr(0, languagesTags.length-1);
+  }
 
-  profileTags = profileTags.substr(0, profileTags.length-1);
+  if(!(document.getElementById("kt_tagify_4").value == '')) {
+    var obj4 = JSON.parse(document.getElementById("kt_tagify_4").value);
+    for(var i4 in obj4)
+      nationalityTags += obj4[i4].value + ',';
+    nationalityTags = nationalityTags.substr(0, nationalityTags.length-1);
+  }
 
-  var obj3 = JSON.parse(document.getElementById("kt_tagify_3").value);
-  for(var i3 in obj3)
-    languagesTags += obj3[i3].value + ',';
-
-  languagesTags = languagesTags.substr(0, languagesTags.length-1);
-
-  var obj4 = JSON.parse(document.getElementById("kt_tagify_4").value);
-  for(var i4 in obj4)
-    nationalityTags += obj4[i4].value + ',';
-
-  nationalityTags = nationalityTags.substr(0, nationalityTags.length-1);
-
-  var obj5 = JSON.parse(document.getElementById("kt_tagify_5").value);
-  for(var i5 in obj5)
-    passportTags += obj5[i5].value + ',';
-
-  passportTags = passportTags.substr(0, passportTags.length-1);
+  if(!(document.getElementById("kt_tagify_5").value == '')) {
+    var obj5 = JSON.parse(document.getElementById("kt_tagify_5").value);
+    for(var i5 in obj5)
+      passportTags += obj5[i5].value + ',';
+    passportTags = passportTags.substr(0, passportTags.length-1);
+  }
 
   $(".page-loader").css("display", "flex");
   e.preventDefault();

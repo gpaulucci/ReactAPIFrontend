@@ -114,12 +114,21 @@ $(document).ready(function(){
       "columns": [
         {"data": "id", className: "d-none d-xs-none", orderable: false},
         { data: null, render: function ( data, type, row ) {
-          return data.firstName+' '+data.lastName;
-        } },
-        {"data": "email"},
-        {"data": "profile"},
-        {"data": "skills"},
-        {"data": null, className: "dt-center editor-edit", orderable: false}
+          return '<p class="text-gray-800 mb-1">' + data.firstName+' '+data.lastName+'</p><p class="text-gray-400 mb-1 small">'+data.email+'</span></p><p class="text-gray-500 mb-1 small">'+data.phone+'</p>';
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<div class="badge badge-light fw-bolder m-1">' + data.profile.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<div class="badge badge-light fw-bolder m-1">' + data.languages.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<div class="badge badge-light fw-bolder m-1">' + data.skills.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
+          
+        } , className: "align-middle"},
+        {"data": null, className: "dt-center editor-edit", orderable: false, className: "align-middle"}
       ],
       responsive: true,
       autoWidth: true,
@@ -139,7 +148,7 @@ $(document).ready(function(){
   // perfil
   var input2 = document.querySelector("#kt_tagify_2");
   new Tagify(input2, {
-      whitelist: ["Architect","Analist","Project Manager"],
+      whitelist: ["Project Manager","Architect","Analyst","Art Designer","Consultant","DBA","Full Stack","Programmer","Tester","Leader","Senior","Semisenior","Junior"],
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
