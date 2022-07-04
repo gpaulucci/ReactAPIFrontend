@@ -1,6 +1,6 @@
 const cApiServer = 'http://desktop-7k0rlgg:5000/api/' // Kestrel
 //const cApiServer = 'https://desktop-7k0rlgg:44349/api/' // IIS
-//const cApiServer = 'http://apis.fortuneware.com/api/' // Fortuneware
+//const cApiServer = 'https://apis.fortuneware.com/api/' // Fortuneware
 
 window.sessionStorage.setItem('APIServer', '');
 

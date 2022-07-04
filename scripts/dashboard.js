@@ -10,6 +10,8 @@ function parseJwt (token) {
   return JSON.parse(jsonPayload);
 };
 
+console.log(parseJwt(window.sessionStorage.getItem('APIToken')));
+
 $(document).ready(function(){
   if(!window.sessionStorage.getItem('APIToken') || window.sessionStorage.getItem('APIToken') == null || window.sessionStorage.getItem('APIToken') == "null"  ) 
     location.href = 'index.html';
@@ -19,6 +21,7 @@ $(document).ready(function(){
 
   if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
     document.getElementById('UserMnuOption').classList.add("d-none");
+    document.getElementById('ApplicantAdminMnuOption').classList.add("d-none");
   }
 })
 

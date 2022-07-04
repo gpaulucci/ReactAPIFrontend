@@ -106,6 +106,14 @@
                                                 <span class="menu-title">Buscar</span>
                                             </a>
                                         </div>
+                                        <div class="menu-item">
+                                            <a class="menu-link py-3" href="applicant-admin.html" id="ApplicantAdminMnuOption">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">Administrar</span>
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <div class="menu-item menu-lg-down-accordion me-lg-1">
@@ -227,43 +235,501 @@
                         <div class="post" id="kt_post">
                             <!--begin::Card-->
                             <div class="card">
-                                <!--begin::Card header-->
-                                <div class="card-header border-0">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <!--begin::Search-->
-                                        <div class="d-flex align-items-center position-relative my-1">
-
+                                <div class="card-body my-3">
+                                    <div id="kt_modal_add_user_form" class="form" action="#">
+                                        <!--begin::Scroll-->
+                                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 639px;">
+                                            <div class="row g-5">
+                                                <!--begin::Col-->
+                                                <!--div class="col-xl-6">
+                                                    <div class="fv-row mb-6">
+                                                        <label class="required fw-bold fs-6 mb-2">Cliente</label>
+                                                        <input type="text" name="user_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Nombre Cliente" value="">
+                                                    </div>
+                                                </div-->
+                                                <div class="col-xl-6">
+                                                    <div class="fv-row mb-7">
+                                                        <label class="required fw-bold fs-6 mb-2">Qué estás buscando?</label>
+                                                        <input class="form-control form-control-solid main-srch-field" value="" placeholder="">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <!--
+                                            <div class="row g-5">
+                                                <div class="col-xl-12">
+                                                    <div class="fv-row mb-7">
+                                                        <label class="fw-bold fs-6 mb-2">Conocimientos específicos</label>
+                                                        <input class="form-control form-control-solid" value="" id="kt_tagify_1" />
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            
                                         </div>
-                                        <!--end::Search-->
+                                        <!--end::Scroll-->
+                                        <!--begin::Actions-->
+                                        <div class="text-end pt-5">
+                                            <a href="applicant-management.html" class="btn btn-light me-3">Ir a mis Candidatos</a>
+                                            <a href="#" class="btn btn-primary main-search">
+                                                <span class="indicator-label">Buscar candidatos</span>
+                                            </a>
+                                        </div>
+                                        <!--end::Actions-->
                                     </div>
                                 </div>
-                                <!--end::Toolbar-->
-                            </div>	
-						</div>
+                                <!--end::Card body-->
+                            </div>
+                            <!--end::Card-->
+                        </div>
 
-                        <div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded" id="kt_content-list">
-                            
+                        <div class="row g-5 d-none search-results">
+                            <div class="col-xl-3 col-xxl-2">
+                                
+                                    <!--begin::Card-->
+                                    <div class="card">
+                                        <div class="card-body ">
+                                            
+                                                <div class="d-flex flex-column me-n7 pe-7">
+                                                    <div class="row g-5">
+                                                        <!--begin::Col-->
+                                                        <div class="col-xl-12">
+                                                            <!--div class="fv-row mb-3">
+                                                                <label class="fw-bold fs-6">Cliente</label>
+                                                                <p class="text-gray-400">Cliente capturado</p>
+                                                            </div-->
+                                                            <div class="fv-row mb-3">
+                                                                <label class="fw-bold fs-6">Palabras clave</label>
+                                                                <p class="text-gray-400 mb-1 key-words-received">Palabras clave capturadas</p>
+                                                            </div>
+                                                            <div class="fv-row mb-3">
+                                                                <label class="fw-bold fs-6">Filtros</label>
+                                                            </div>
+                                                            <div class="fv-row mb-3">
+                                                                <div class="accordion" id="kt_accordion_1">
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                                                                            <button class="accordion-button fs-6 fw-bold text-gray-600 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="false" aria-controls="kt_accordion_1_body_1">
+                                                                                Conocimientos
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="kt_accordion_1_body_1" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1" style="">
+                                                                            <div class="accordion-body">
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP SD" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP SD
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP MM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP MM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP FI" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP FI
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP CO" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP CO
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP FICO" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP FICO
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PP" id="flexCheckDefault">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PP
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP QM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP QM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP WM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP WM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP EWM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP EWM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP CAR" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP CAR
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP SRM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP SRM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP CRM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP CRM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ABAP" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ABAP
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PROJECT MANAGER" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PROJECT MANAGER
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP MII" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP MII
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP QM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP QM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP REAL STATE" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP REAL STATE
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP RETAIL" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP RETAIL
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP SUCCESS FACTORS" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP SUCCESS FACTORS
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP ARIBA" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP ARIBA
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP LETRA" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP LETRA
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP BW" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP BW
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP BO" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP BO
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PI" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PI
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PO" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PO
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PI PO" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PI PO
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP PS" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP PS
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="SAP HCM" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        SAP HCM
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ORACLE WMS" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ORACLE WMS
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ORACLE scm" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ORACLE scm
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ORACLE fi" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ORACLE fi
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ORACLE hrm" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ORACLE hrm
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="ORACLE sd" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        ORACLE sd
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="java" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        java
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="react" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        react
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="automation" id="knowlgOpt">
+                                                                                    <label class="form-check-label" for="knowlgOpt">
+                                                                                        automation
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                                        <div class="table-responsive">
-                                            <table id="applicantsTable" class="table mt-2 table-striped table-bordered" style="width:100%;">
-                                                <thead class="">
-                                                    <tr class="">
-                                                        <th>Id</th>
-                                                        <th>Nombre/Apellido</th>
-                                                        <th>Perfil</th>
-                                                        <th>Idiomas</th>
-                                                        <th>Conocimientos</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="kt_accordion_1_header_2">
+                                                                            <button class="accordion-button fs-6 fw-bold text-gray-600 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_2" aria-expanded="false" aria-controls="kt_accordion_1_body_2">
+                                                                            Idiomas
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="kt_accordion_1_body_2" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1" style="">
+                                                                            <div class="accordion-body">
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Inglés" id="langOpt">
+                                                                                    <label class="form-check-label" for="langOpt">
+                                                                                        Inglés
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Español" id="langOpt">
+                                                                                    <label class="form-check-label" for="langOpt">
+                                                                                        Español
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Portugués" id="langOpt">
+                                                                                    <label class="form-check-label" for="langOpt">
+                                                                                        Portugués
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Chino" id="langOpt">
+                                                                                    <label class="form-check-label" for="langOpt">
+                                                                                        Chino
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Alemán" id="langOpt">
+                                                                                    <label class="form-check-label" for="langOpt">
+                                                                                        Alemán
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                                                </tbody>
-                                            </table>
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="kt_accordion_1_header_3">
+                                                                            <button class="accordion-button fs-6 fw-bold text-gray-600 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_3" aria-expanded="false" aria-controls="kt_accordion_1_body_3">
+                                                                            Perfil
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="kt_accordion_1_body_3" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1" style="">
+                                                                            <div class="accordion-body">
+                                                                               <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Architect" id="profileOpt">
+                                                                                    <label class="form-check-label" for="profileOpt">
+                                                                                        Architect
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Analist" id="profileOpt">
+                                                                                    <label class="form-check-label" for="profileOpt">
+                                                                                        Analist
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Consultant" id="profileOpt">
+                                                                                    <label class="form-check-label" for="profileOpt">
+                                                                                        Consultant
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Project Manager" id="profileOpt">
+                                                                                    <label class="form-check-label" for="profileOpt">
+                                                                                        Project Manager
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="kt_accordion_1_header_4">
+                                                                            <button class="accordion-button fs-6 fw-bold text-gray-600 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_4" aria-expanded="false" aria-controls="kt_accordion_1_body_4">
+                                                                            Nacionalidad
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="kt_accordion_1_body_4" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_4" data-bs-parent="#kt_accordion_1" style="">
+                                                                            <div class="accordion-body">
+                                                                               <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Argentina" id="nationalityOpt">
+                                                                                    <label class="form-check-label" for="nationalityOpt">
+                                                                                        Argentina
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Mexicana" id="nationalityOpt">
+                                                                                    <label class="form-check-label" for="nationalityOpt">
+                                                                                        Mexicana
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Europea" id="nationalityOpt">
+                                                                                    <label class="form-check-label" for="nationalityOpt">
+                                                                                        Europea
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="kt_accordion_1_header_5">
+                                                                            <button class="accordion-button fs-6 fw-bold collapsed text-gray-600" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_5" aria-expanded="false" aria-controls="kt_accordion_1_body_5">
+                                                                            Pasaportes / Visas
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="kt_accordion_1_body_5" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_5" data-bs-parent="#kt_accordion_1">
+                                                                            <div class="accordion-body">
+                                                                               <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="B1/B2" id="visaOpt">
+                                                                                    <label class="form-check-label" for="visaOpt">
+                                                                                        B1/B2
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="GreenCard" id="visaOpt">
+                                                                                    <label class="form-check-label" for="visaOpt">
+                                                                                        GreenCard
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="Europa" id="visaOpt">
+                                                                                    <label class="form-check-label" for="visaOpt">
+                                                                                        Europa
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="México" id="visaOpt">
+                                                                                    <label class="form-check-label" for="visaOpt">
+                                                                                        México
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check form-check-custom form-check-solid mb-2">
+                                                                                    <input class="form-check-input" type="checkbox" value="FM3" id="visaOpt">
+                                                                                    <label class="form-check-label" for="visaOpt">
+                                                                                        FM3
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>	
+                                                            </div>
+                                                            
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Scroll-->
+                                                <!--begin::Actions-->
+                                                <div class="text-center pt-5">
+                                                    <a href="#" class="btn btn-primary btn-secodary-search">
+                                                        <span class="indicator-label">Reiniciar Búsqueda</span>
+                                                        <span class="indicator-progress">Please wait...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    </a>
+                                                </div>
+                                                <!--end::Actions-->												
                                         </div>
-
-						</div>
+                                        <!--end::Card body-->
+                                    </div>
+                                    <!--end::Card-->
+                            </div>
+                            <div class="col-xl-9 col-xxl-10">
+                                <div class="card">
+                                    <div class="card-body ">
+                                        <table id="applicantsTable" class="table align-middle table-striped gy-7 gs-7 table-row-dashed">
+                                            <thead>
+                                                <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                                                    <th>Id</th>
+                                                    <th class="min-w-125px" style="width:25%">Nombre/Apellido</th>
+                                                    <th class="min-w-125px" style="width:60%">Perfil</th>
+                                                    <th class="text-end min-w-100px" style="width:15%">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 						<!--end::Content-->
 
                         <div class="modal fade" id="Modal CRUD" tabindex="-1" role="dialog"></div>

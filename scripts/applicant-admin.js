@@ -94,7 +94,7 @@ $(document).ready(function(){
     applicantsTable = $("#applicantsTable").DataTable({
       processing: true,
       "ajax":{
-        url: window.sessionStorage.getItem('APIServer') + "Applicant?idOwner=" + window.sessionStorage.getItem('APIUserID') + "&Status=active",
+        url: window.sessionStorage.getItem('APIServer') + "Applicant?&Status=active",
         dataSrc: "data",
         dataType: "json",
         cache: false,
@@ -425,7 +425,7 @@ formCandidatos.addEventListener('submit', (e) => {
           passport: passportTags,
           source: appFormSource.value,
           notes: appFormNotes.value,
-          ranking: appFormRating.value==''?0:appFormRating.value,
+          ranking: appFormRating.value,
           idOwner: window.sessionStorage.getItem('APIUserID'),
           status: "active",
           UIdFileResume: fileUID==''?'00000000-0000-0000-0000-000000000000':fileUID,

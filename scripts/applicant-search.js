@@ -11,7 +11,6 @@ document.querySelector('.menu-item-applicant').addEventListener('click', (e) => 
   element.classList.toggle("show");
 });
 
-
 clickLogout = (e) => {
   window.sessionStorage.setItem('APIToken', null);
   window.sessionStorage.setItem('APIName', null);
@@ -76,64 +75,8 @@ $(document).ready(function(){
     document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
     if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
       document.getElementById('UserMnuOption').classList.add("d-none");
+      document.getElementById('ApplicantAdminMnuOption').classList.add("d-none");
     }
-    applicantsTable = $("#applicantsTable").DataTable({
-      processing: true,
-      "ajax":{
-        url: window.sessionStorage.getItem('APIServer') + "Applicant?Status=active",
-        dataSrc: "data",
-        dataType: "json",
-        cache: false,
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + JSON.parse(window.sessionStorage.getItem('APIToken'))
-        }
-      },
-      "columnDefs":[{
-        "targets":-1,
-        "data":null,
-        //"defaultContent":"<div class='text-center'><div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>Borrar</a></div></div>"
-        //"defaultContent":"<div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' id='btnBorrar' data-bs-toggle='modal' data-bs-target='#kt_modal_delete_applicant' class='btnBorrar menu-link px-3'>Borrar</a></div>"
-        "defaultContent":"<a href='#' class='btnEditar menu-link px-3'>&nbsp;&nbsp;Visualizar</a>"
-      }],
-      "language":{
-        "lengthMenu":"Mostrar _MENU_ registros",
-        "zeroRecords":"No se han encontrado registros.",
-        "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros ",
-        "infoFiltered": "(filtrado de un total de _MAX_ registros",
-        "sSearch": "Buscar",
-        "oPaginate": {
-          "sFirst": "Primero",
-          "sLast": "Último",
-          "sNext": "Siguiente",
-          "sPrevious": "Anterior"
-        }
-        ,"sProcessing": "<h2 class='mt-2 bg-white'>Procesando...</h2>",
-      },
-      "columns": [
-        {"data": "id", className: "d-none d-xs-none", orderable: false},
-        { data: null, render: function ( data, type, row ) {
-          return '<p class="text-gray-800 mb-1">' + data.firstName+' '+data.lastName+'</p><p class="text-gray-400 mb-1 small">'+data.email+'</span></p><p class="text-gray-500 mb-1 small">'+data.phone+'</p>';
-        } , className: "align-middle"},
-        { data: null, render: function ( data, type, row ) {
-          return '<div class="badge badge-light fw-bolder m-1">' + data.profile.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
-          
-        } , className: "align-middle"},
-        { data: null, render: function ( data, type, row ) {
-          return '<div class="badge badge-light fw-bolder m-1">' + data.languages.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
-          
-        } , className: "align-middle"},
-        { data: null, render: function ( data, type, row ) {
-          return '<div class="badge badge-light fw-bolder m-1">' + data.skills.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') + '</div>';
-          
-        } , className: "align-middle"},
-        {"data": null, className: "dt-center editor-edit", orderable: false, className: "align-middle"}
-      ],
-      responsive: true,
-      autoWidth: true,
-      searching: true
-    });
     $(".page-loader").css("display", "none");
   }
 
@@ -156,7 +99,7 @@ $(document).ready(function(){
   // idiomas
   var input3 = document.querySelector("#kt_tagify_3");
   new Tagify(input3, {
-      whitelist: ["Ingles","Español","Portugues","Chino","Frances","Aleman"],
+      whitelist: ["Inglés","Español","Portugués","Chino","Francés","Alemán"],
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
@@ -176,6 +119,8 @@ $(document).ready(function(){
       placeholder: "Escribe para buscar",
       enforceWhitelist: true
   });
+
+  $(".page-loader").css("display", "none");
 });
 
 // ******************************************************************
@@ -322,3 +267,246 @@ on(document, 'click', '.btnEditar', e => {
   $(".page-loader").css("display", "none");
   option = 'edit';
 })
+
+
+document.querySelector('.main-search').addEventListener('click', (e) => {
+
+  if (document.querySelector('.main-srch-field').value.length < 3) {
+
+    alertify.defaults.glossary.title = 'Aviso';
+    alertify.defaults.glossary.ok = 'Ok';    
+    alertify.alert("Debe ingresar las palabras que desea buscar.", function(){
+        //alertify.message('OK');
+    })
+
+    return;
+  }
+
+  $(".page-loader").css("display", "flex");
+  document.querySelector('.key-words-received').innerHTML = document.querySelector('.main-srch-field').value;
+
+  if ( $.fn.dataTable.isDataTable( '#applicantsTable' ) ) {
+    table = $('#applicantsTable').DataTable();
+    table.destroy();
+  }
+
+  applicantsTable = $("#applicantsTable").DataTable({
+    processing: true,
+    "ajax":{
+      url: window.sessionStorage.getItem('APIServer') + "Applicant?Status=active&ResumeText=" + document.querySelector('.main-srch-field').value,
+      dataSrc: "data",
+      dataType: "json",
+      cache: false,
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + JSON.parse(window.sessionStorage.getItem('APIToken'))
+      }
+    },
+    "columnDefs":[{
+      "targets":-1,
+      "data":null,
+      //"defaultContent":"<div class='text-center'><div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>Borrar</a></div></div>"
+      //"defaultContent":"<div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' id='btnBorrar' data-bs-toggle='modal' data-bs-target='#kt_modal_delete_applicant' class='btnBorrar menu-link px-3'>Borrar</a></div>"
+      "defaultContent":"<a href='#' class='btnEditar menu-link px-3'>&nbsp;&nbsp;Visualizar</a>"
+    }],
+    "language":{
+      "lengthMenu":"Mostrar _MENU_ registros",
+      "zeroRecords":"No se han encontrado registros.",
+      "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros ",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros",
+      "sSearch": "Buscar",
+      "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+      }
+      ,"sProcessing": "<h2 class='mt-2 bg-white'>Procesando...</h2>",
+    },
+    "columns": [
+      {"data": "id", className: "d-none d-xs-none", orderable: false},
+      { data: null, render: function ( data, type, row ) {
+        return '<p class="text-gray-800 mb-1">' + data.firstName+' '+data.lastName+'</p>';
+      } , className: "align-middle"},
+      { data: null, render: function ( data, type, row ) {
+        return '<p class="text-gray-600 mb-1 fs-7">Conocimientos</p><div class="badge badge-secondary fw-bolder m-1">' 
+          + data.skills.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+          + '</div>'
+          + '<p class="text-gray-600 mb-1 fs-7">Perfiles</p><div class="badge badge-secondary fw-bolder m-1">' 
+          + data.profile.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+          + '</div>'
+          + '<p class="text-gray-600 mb-1 fs-7">Idiomas</p><div class="badge badge-secondary fw-bolder m-1">' 
+          + data.languages.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+          + '</div>'
+          + '<p class="text-gray-600 mb-1 fs-7">Nacionalidades</p><div class="badge badge-secondary fw-bolder m-1">' 
+          + data.nationality.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+          + '</div>'
+          + '<p class="text-gray-600 mb-1 fs-7">Pasaporte</p><div class="badge badge-secondary fw-bolder m-1">' 
+          + data.passport.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+          + '</div>';
+        
+      } , className: "align-middle"},
+      {"data": null, className: "dt-center editor-edit", orderable: false, className: "align-middle"}
+    ],
+    responsive: true,
+    autoWidth: false,
+    searching: false
+  });
+  $(".page-loader").css("display", "none");
+  var element = document.querySelector('.search-results');
+  element.classList.toggle("d-none");
+  var element = document.querySelector('#kt_post');
+  element.classList.toggle("d-none");
+});
+
+
+document.querySelector('.btn-secodary-search').addEventListener('click', (e) => {
+
+    var knowlgOptVals = '';
+    var langOptVals = '';
+    var profileOptVals = '';
+    var nationalityOptVals = '';
+    var visaOptVals = '';
+    var mainSearchVal = document.querySelector('.key-words-received').innerHTML;
+
+
+    var selectedKnwlgItems = document.querySelectorAll('#knowlgOpt');
+    selectedKnwlgItems.forEach(function(knowlgOpt) {
+      if(knowlgOpt.checked) {
+        if(knowlgOptVals.length > 0) knowlgOptVals += ',';
+        knowlgOptVals += knowlgOpt.value;
+      }
+    });
+
+    var selectedLangItems = document.querySelectorAll('#langOpt');
+    selectedLangItems.forEach(function(langOpt) {
+      if(langOpt.checked) {
+        if(langOptVals.length > 0) langOptVals += ',';
+        langOptVals += langOpt.value;
+      }
+    });
+
+    var selectedProfileItems = document.querySelectorAll('#profileOpt');
+    selectedProfileItems.forEach(function(profileOpt) {
+      if(profileOpt.checked) {
+        if(profileOptVals.length > 0) profileOptVals += ',';
+        profileOptVals += profileOpt.value;
+      }
+    });
+
+    var selectedNationalityItems = document.querySelectorAll('#nationalityOpt');
+    selectedNationalityItems.forEach(function(nationalityOpt) {
+      if(nationalityOpt.checked) {
+        if(nationalityOptVals.length > 0) nationalityOptVals += ',';
+        nationalityOptVals += nationalityOpt.value;
+      }
+    });
+
+    var selectedVisaItems = document.querySelectorAll('#visaOpt');
+    selectedVisaItems.forEach(function(visaOpt) {
+      if(visaOpt.checked) {
+        if(visaOptVals.length > 0) visaOptVals += ',';
+        visaOptVals += visaOpt.value;
+      }
+    });
+
+    var secondarySearch = '';
+    if (knowlgOptVals.length > 0)
+      secondarySearch += '&skill=' + knowlgOptVals;
+
+    if (langOptVals.length > 0)
+      secondarySearch += '&language=' + langOptVals;
+
+    if (profileOptVals.length > 0)
+      secondarySearch += '&profile=' + profileOptVals;
+
+    if (nationalityOptVals.length > 0)
+      secondarySearch += '&nationality=' + nationalityOptVals;
+
+    if (visaOptVals.length > 0)
+      secondarySearch += '&passport=' + visaOptVals;
+
+    if(secondarySearch.length <= 0) {
+      alertify.defaults.glossary.title = 'Aviso';
+      alertify.defaults.glossary.ok = 'Ok';    
+      alertify.alert("No se han seleccionado filtros adicionales para aplicar.", function(){
+          //alertify.message('OK');
+      })
+  
+      return;
+    }
+
+    $(".page-loader").css("display", "flex");
+    // init search
+    if ( $.fn.dataTable.isDataTable( '#applicantsTable' ) ) {
+      table = $('#applicantsTable').DataTable();
+      table.destroy();
+    }
+  
+    applicantsTable = $("#applicantsTable").DataTable({
+      processing: true,
+      "ajax":{
+        url: window.sessionStorage.getItem('APIServer') + "Applicant?Status=active&ResumeText=" + mainSearchVal + secondarySearch,
+        dataSrc: "data",
+        dataType: "json",
+        cache: false,
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + JSON.parse(window.sessionStorage.getItem('APIToken'))
+        }
+      },
+      "columnDefs":[{
+        "targets":-1,
+        "data":null,
+        //"defaultContent":"<div class='text-center'><div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>Borrar</a></div></div>"
+        //"defaultContent":"<div class='btn-group'><a href='#' data-bs-toggle='modal' data-bs-target='#kt_modal_edit_applicant' class='menu-link px-3'>&nbsp;&nbsp;Editar</a>&nbsp;<a href='#' id='btnBorrar' data-bs-toggle='modal' data-bs-target='#kt_modal_delete_applicant' class='btnBorrar menu-link px-3'>Borrar</a></div>"
+        "defaultContent":"<a href='#' class='btnEditar menu-link px-3'>&nbsp;&nbsp;Visualizar</a>"
+      }],
+      "language":{
+        "lengthMenu":"Mostrar _MENU_ registros",
+        "zeroRecords":"No se han encontrado registros.",
+        "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros ",
+        "infoFiltered": "(filtrado de un total de _MAX_ registros",
+        "sSearch": "Buscar",
+        "oPaginate": {
+          "sFirst": "Primero",
+          "sLast": "Último",
+          "sNext": "Siguiente",
+          "sPrevious": "Anterior"
+        }
+        ,"sProcessing": "<h2 class='mt-2 bg-white'>Procesando...</h2>",
+      },
+      "columns": [
+        {"data": "id", className: "d-none d-xs-none", orderable: false},
+        { data: null, render: function ( data, type, row ) {
+          return '<p class="text-gray-800 mb-1">' + data.firstName+' '+data.lastName+'</p>';
+        } , className: "align-middle"},
+        { data: null, render: function ( data, type, row ) {
+          return '<p class="text-gray-600 mb-1 fs-7">Conocimientos</p><div class="badge badge-secondary fw-bolder m-1">' 
+            + data.skills.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+            + '</div>'
+            + '<p class="text-gray-600 mb-1 fs-7">Perfiles</p><div class="badge badge-secondary fw-bolder m-1">' 
+            + data.profile.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+            + '</div>'
+            + '<p class="text-gray-600 mb-1 fs-7">Idiomas</p><div class="badge badge-secondary fw-bolder m-1">' 
+            + data.languages.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+            + '</div>'
+            + '<p class="text-gray-600 mb-1 fs-7">Nacionalidades</p><div class="badge badge-secondary fw-bolder m-1">' 
+            + data.nationality.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+            + '</div>'
+            + '<p class="text-gray-600 mb-1 fs-7">Pasaporte</p><div class="badge badge-secondary fw-bolder m-1">' 
+            + data.passport.replace(/,/g, '</div><div class="badge badge-light fw-bolder m-1">') 
+            + '</div>';
+          
+        } , className: "align-middle"},
+        {"data": null, className: "dt-center editor-edit", orderable: false, className: "align-middle"}
+      ],
+      responsive: true,
+      autoWidth: false,
+      searching: false
+    });
+    $(".page-loader").css("display", "none");
+
+});

@@ -1,0 +1,68 @@
+/* estilos del las estrellas del ranking */
+.rating {
+    transform: translate(-50%, -50%) rotateY(180deg);
+}
+.rating input {
+    /* display: none; */
+    display: none;
+}
+
+.rating label {
+    display: block;
+    cursor: pointer;
+    width: 25px;
+    background: #ffffff;
+}
+
+.rating label:before {
+    content: '\f005';
+    font-family: "fontAwesome";
+    position: relative;
+    display: block;
+    font-size: 15px;
+    color: #cccc;
+    top: 22px;
+}
+.rating label:after {
+    content: '\f005';
+    font-family: "fontAwesome";
+    position: relative;
+    display: block;
+    font-size: 15px;
+    color: #fbc634;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+    opacity: 1;
+}
+
+
+/* estilos de los tags (conocimientos, fuentes, idiomas, etc) */
+.tag-container .tag {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    cursor: default;
+}
+.tag i {
+    font-size: 12px;
+    margin-left: 5px;
+
+}
+.tag-container input {
+    flex: 1;
+    font-size: 12px;
+    padding: 5px;
+    outline: none;
+    border: 0;
+}

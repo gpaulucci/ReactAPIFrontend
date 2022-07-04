@@ -41,6 +41,7 @@ $(document).ready(function(){
     document.getElementById("LoginName").innerHTML = window.sessionStorage.getItem('APIName');
     if(window.sessionStorage.getItem('APIUserRole')!='Administrador') {
       document.getElementById('UserMnuOption').classList.add("d-none");
+      document.getElementById('ApplicantAdminMnuOption').classList.add("d-none");
     }
     //$.fn.dataTableExt.sErrMode = 'throw'; 
     usersTable = $("#usersTable").DataTable({
